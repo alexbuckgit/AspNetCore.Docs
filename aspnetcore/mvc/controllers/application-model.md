@@ -1,10 +1,9 @@
 ---
 title: Work with the application model in ASP.NET Core
-author: rick-anderson
+author: tdykstra
 description: Learn how to read and manipulate the application model to modify how MVC elements behave in ASP.NET Core.
-ms.author: riande
+ms.author: tdykstra
 ms.date: 04/05/2021
-no-loc: ["Blazor Hybrid", Home, Privacy, Kestrel, appsettings.json, "ASP.NET Core Identity", cookie, Cookie, Blazor, "Blazor Server", "Blazor WebAssembly", "Identity", "Let's Encrypt", Razor, SignalR]
 uid: mvc/controllers/application-model
 ---
 # Work with the application model in ASP.NET Core

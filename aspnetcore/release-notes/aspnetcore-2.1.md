@@ -4,8 +4,7 @@ author: isaacrlevin
 description: Learn about the new features in ASP.NET Core 2.1.
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/05/2019
-no-loc: ["Blazor Hybrid", Home, Privacy, Kestrel, appsettings.json, "ASP.NET Core Identity", cookie, Cookie, Blazor, "Blazor Server", "Blazor WebAssembly", "Identity", "Let's Encrypt", Razor, SignalR]
+ms.date: 02/06/2023
 uid: aspnetcore-2.1
 ---
 # What's new in ASP.NET Core 2.1
@@ -14,7 +13,9 @@ This article highlights the most significant changes in ASP.NET Core 2.1, with l
 
 ## SignalR
 
-SignalR has been rewritten for ASP.NET Core 2.1. ASP.NET Core SignalR includes a number of improvements:
+SignalR has been rewritten for ASP.NET Core 2.1.
+
+ASP.NET Core SignalR includes a number of improvements:
 
 * A simplified scale-out model.
 * A new JavaScript client with no jQuery dependency.
@@ -32,11 +33,11 @@ ASP.NET Core 2.1 makes it easier to build and include Razor-based UI in a librar
 * The app startup time is significantly faster.
 * Fast updates to Razor views and pages at runtime are still available as part of an iterative development workflow.
 
-For more information, see [Create reusable UI using the Razor Class Library project](xref:razor-pages/ui-class).
+For more information, see <xref:razor-pages/ui-class>.
 
 ## Identity UI library & scaffolding
 
-ASP.NET Core 2.1 provides [ASP.NET Core Identity](xref:security/authentication/identity) as a [Razor Class Library](xref:razor-pages/ui-class). Apps that include Identity can apply the new Identity scaffolder to selectively add the source code contained in the Identity Razor Class Library (RCL). You might want to generate source code so you can modify the code and change the behavior. For example, you could instruct the scaffolder to generate the code used in registration. Generated code takes precedence over the same code in the Identity RCL.
+ASP.NET Core 2.1 provides [ASP.NET Core Identity](xref:security/authentication/identity) as a [Razor class library](xref:razor-pages/ui-class). Apps that include Identity can apply the new Identity scaffolder to selectively add the source code contained in the Identity Razor class library (RCL). You might want to generate source code so you can modify the code and change the behavior. For example, you could instruct the scaffolder to generate the code used in registration. Generated code takes precedence over the same code in the Identity RCL.
 
 Apps that do **not** include authentication can apply the Identity scaffolder to add the RCL Identity package. You have the option of selecting Identity code to be generated.
 
@@ -136,15 +137,14 @@ For more information, see [.NET Generic Host](xref:fundamentals/host/generic-hos
 
 ## Updated SPA templates
 
-The Single Page Application templates for Angular, React, and React with Redux are updated to use the standard project structures and build systems for each framework.
+The Single Page Application templates for Angular and React are updated to use the standard project structures and build systems for each framework.
 
-The Angular template is based on the Angular CLI, and the React templates are based on create-react-app.
+The Angular template is based on the Angular CLI, and the React template is based on create-react-app.
 
 For more information, see:
 
 * <xref:spa/angular>
 * <xref:spa/react>
-* <xref:spa/react-with-redux>
 
 ## Razor Pages search for Razor assets
 

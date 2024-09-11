@@ -3,10 +3,9 @@ title: Use hub filters in ASP.NET Core SignalR
 author: brecon
 description: Learn how to use hub filters in ASP.NET Core SignalR.
 monikerRange: '>= aspnetcore-5.0'
-ms.author: brecon
+ms.author: wpickett
 ms.custom: mvc
 ms.date: 05/22/2020
-no-loc: ["Blazor Hybrid", Home, Privacy, Kestrel, appsettings.json, "ASP.NET Core Identity", cookie, Cookie, Blazor, "Blazor Server", "Blazor WebAssembly", "Identity", "Let's Encrypt", Razor, SignalR]
 uid: signalr/hub-filters
 ---
 
@@ -149,7 +148,7 @@ For this example, assume a `LanguageFilterAttribute` class is defined. The class
                     str = str.Replace(bannedPhrase, "***");
                 }
 
-                arguments = invocationContext.HubMethodArguments.ToArray();
+                var arguments = invocationContext.HubMethodArguments.ToArray();
                 arguments[languageFilter.FilterArgument] = str;
                 invocationContext = new HubInvocationContext(invocationContext.Context,
                     invocationContext.ServiceProvider,

@@ -2,10 +2,9 @@
 title: Migrate from ClaimsPrincipal.Current
 author: mjrousos
 description: Learn how to migrate away from ClaimsPrincipal.Current to retrieve the current authenticated user's identity and claims in ASP.NET Core.
-ms.author: scaddie
+ms.author: wpickett
 ms.custom: mvc
 ms.date: 03/26/2019
-no-loc: ["Blazor Hybrid", Home, Privacy, Kestrel, appsettings.json, "ASP.NET Core Identity", cookie, Cookie, Blazor, "Blazor Server", "Blazor WebAssembly", "Identity", "Let's Encrypt", Razor, SignalR]
 uid: migration/claimsprincipal-current
 ---
 # Migrate from ClaimsPrincipal.Current

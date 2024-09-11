@@ -2,9 +2,9 @@
 title: Introduction to Identity on ASP.NET Core
 author: rick-anderson
 description: Use Identity with an ASP.NET Core app. Learn how to set password requirements (RequireDigit, RequiredLength, RequiredUniqueChars, and more).
+monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
-ms.date: 9/15/2021
-no-loc: ["Blazor Hybrid", Home, Privacy, Kestrel, appsettings.json, "ASP.NET Core Identity", cookie, Cookie, Blazor, "Blazor Server", "Blazor WebAssembly", "Identity", "Let's Encrypt", Razor, SignalR]
+ms.date: 04/26/2024
 uid: security/authentication/identity
 ---
 # Introduction to Identity on ASP.NET Core
@@ -28,12 +28,12 @@ Identity is typically configured using a SQL Server database to store user names
 
 In this topic, you learn how to use Identity to register, log in, and log out a user. Note: the templates treat username and email as the same for users. For more detailed instructions about creating apps that use Identity, see [Next Steps](#next).
 
-[Microsoft identity platform](/azure/active-directory/develop/) is:
+ASP.NET Core Identity isn't related to the [Microsoft identity platform](/azure/active-directory/develop/). Microsoft identity platform is:
 
 * An evolution of the Azure Active Directory (Azure AD) developer platform.
-* Unrelated to ASP.NET Core Identity.
+* An alternative identity solution for authentication and authorization in ASP.NET Core apps.
 
-[!INCLUDE[](~/includes/IdentityServer4.md)]
+[!INCLUDE[](~/includes/DuendeIdentityServer.md)]
 
 [View or download the sample code](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/security/authentication/identity/sample) ([how to download](xref:index#how-to-download-a-sample)).
 
@@ -48,7 +48,7 @@ Create an ASP.NET Core Web Application project with Individual User Accounts.
 * Select the **ASP.NET Core Web App** template. Name the project **WebApp1** to have the same namespace as the project download. Click **OK**.
 * In the **Authentication type** input,  select  **Individual User Accounts**.
 
-# [.NET Core CLI](#tab/netcore-cli)
+# [.NET CLI](#tab/net-cli)
 
 ```dotnetcli
 dotnet new webapp --auth Individual -o WebApp1
@@ -62,7 +62,7 @@ dotnet new webapp --auth Individual -uld -o WebApp1
 
 ---
 
-The generated project provides [ASP.NET Core Identity](xref:security/authentication/identity) as a [Razor Class Library](xref:razor-pages/ui-class). The Identity Razor Class Library exposes endpoints with the `Identity` area. For example:
+The generated project provides [ASP.NET Core Identity](xref:security/authentication/identity) as a [Razor class library](xref:razor-pages/ui-class). The Identity Razor class library exposes endpoints with the `Identity` area. For example:
 
 * /Identity/Account/Login
 * /Identity/Account/Logout
@@ -78,7 +78,7 @@ Run the following command in the Package Manager Console (PMC):
 
 `Update-Database`
 
-# [.NET Core CLI](#tab/netcore-cli)
+# [.NET CLI](#tab/net-cli)
 
 Migrations are not necessary at this step when using SQLite.
 
@@ -105,7 +105,7 @@ Run the app and register a user. Depending on your screen size, you might need t
 Services are added in `Program.cs`. The typical pattern is to call methods in the following order:
 
 1. `Add{Service}`
-1. `Services.Configure{Service}`
+1. `builder.Services.Configure{Service}`
 
 [!code-csharp[](identity/sample/WebApp6x/Program.cs?name=snippet_)]
 
@@ -113,7 +113,7 @@ The preceding code configures Identity with default option values. Services are 
 
 Identity is enabled by calling <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication%2A>. `UseAuthentication` adds authentication [middleware](xref:fundamentals/middleware/index) to the request pipeline.
 
-The template-generated app doesn't use [authorization](xref:security/authorization/secure-data). `app.UseAuthorization` is included to ensure it's added in the correct order should the app add authorization. `UseRouting`, `UseAuthentication`, `UseAuthorization`, and `UseEndpoints` must be called in the order shown in the preceding code.
+The template-generated app doesn't use [authorization](xref:security/authorization/secure-data). `app.UseAuthorization` is included to ensure it's added in the correct order should the app add authorization. `UseRouting`, `UseAuthentication`, and `UseAuthorization` must be called in the order shown in the preceding code.
 
 For more information on `IdentityOptions`, see <xref:Microsoft.AspNetCore.Identity.IdentityOptions> and [Application Startup](xref:fundamentals/startup).
 
@@ -125,7 +125,7 @@ For more information on `IdentityOptions`, see <xref:Microsoft.AspNetCore.Identi
 
 Add the `Register`, `Login`, `LogOut`, and `RegisterConfirmation` files. Follow the [Scaffold identity into a Razor project with authorization](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-razor-project-with-authorization) instructions to generate the code shown in this section.
 
-# [.NET Core CLI](#tab/netcore-cli)
+# [.NET CLI](#tab/net-cli)
 
 If you created the project with name **WebApp1**, and you're not using SQLite, run the following commands. Otherwise, use the correct namespace for the `ApplicationDbContext`:
 
@@ -180,7 +180,7 @@ In the preceding code, the code `return RedirectToPage();` needs to be a redirec
 
 <xref:Microsoft.AspNetCore.Identity.SignInManager%601.SignOutAsync%2A> clears the user's claims stored in a cookie.
 
-Post is specified in the *Pages/Shared/_LoginPartial.cshtml*:
+Post is specified in the `Pages/Shared/_LoginPartial.cshtml`:
 
 [!code-cshtml[](identity/sample/WebApp3/Pages/Shared/_LoginPartial.cshtml?highlight=15)]
 
@@ -244,6 +244,8 @@ To prevent publishing static Identity assets (stylesheets and JavaScript files f
 ## Next Steps
 
 * [ASP.NET Core Identity source code](https://github.com/dotnet/aspnetcore/tree/main/src/Identity)
+* [How to work with Roles in ASP.NET Core Identity](https://www.yogihosting.com/aspnet-core-identity-roles/)
+<!-- https://github.com/dotnet/AspNetCore.Docs/issues/7114 -->
 * See [this GitHub issue](https://github.com/dotnet/AspNetCore.Docs/issues/5131) for information on configuring Identity using SQLite.
 * [Configure Identity](xref:security/authentication/identity-configuration)
 * <xref:security/authorization/secure-data>
@@ -276,9 +278,9 @@ Identity is typically configured using a SQL Server database to store user names
 In this topic, you learn how to use Identity to register, log in, and log out a user. Note: the templates treat username and email as the same for users. For more detailed instructions about creating apps that use Identity, see [Next Steps](#next).
 
 [Microsoft identity platform](/azure/active-directory/develop/) is:
-
 * An evolution of the Azure Active Directory (Azure AD) developer platform.
-* Unrelated to ASP.NET Core Identity.
+* An alternative identity solution for authentication and authorization in ASP.NET Core apps.
+* Not related to ASP.NET Core Identity.
 
 [!INCLUDE[](~/includes/IdentityServer4.md)]
 
@@ -297,7 +299,7 @@ Create an ASP.NET Core Web Application project with Individual User Accounts.
 * Select an ASP.NET Core **Web Application**, then select **Change Authentication**.
 * Select **Individual User Accounts** and click **OK**.
 
-# [.NET Core CLI](#tab/netcore-cli)
+# [.NET CLI](#tab/net-cli)
 
 ```dotnetcli
 dotnet new webapp --auth Individual -o WebApp1
@@ -311,7 +313,7 @@ dotnet new webapp --auth Individual -uld -o WebApp1
 
 ---
 
-The generated project provides [ASP.NET Core Identity](xref:security/authentication/identity) as a [Razor Class Library](xref:razor-pages/ui-class). The Identity Razor Class Library exposes endpoints with the `Identity` area. For example:
+The generated project provides [ASP.NET Core Identity](xref:security/authentication/identity) as a [Razor class library](xref:razor-pages/ui-class). The Identity Razor class library exposes endpoints with the `Identity` area. For example:
 
 * /Identity/Account/Login
 * /Identity/Account/Logout
@@ -327,7 +329,7 @@ Run the following command in the Package Manager Console (PMC):
 
 `PM> Update-Database`
 
-# [.NET Core CLI](#tab/netcore-cli)
+# [.NET CLI](#tab/net-cli)
 
 Migrations are not necessary at this step when using SQLite.
 
@@ -391,7 +393,7 @@ For more information on `IdentityOptions` and `Startup`, see <xref:Microsoft.Asp
 
 Add the `Register`, `Login`, `LogOut`, and `RegisterConfirmation` files. Follow the [Scaffold identity into a Razor project with authorization](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-razor-project-with-authorization) instructions to generate the code shown in this section.
 
-# [.NET Core CLI](#tab/netcore-cli)
+# [.NET CLI](#tab/net-cli)
 
 If you created the project with name **WebApp1**, and you're not using SQLite, run the following commands. Otherwise, use the correct namespace for the `ApplicationDbContext`:
 
@@ -446,7 +448,7 @@ In the preceding code, the code `return RedirectToPage();` needs to be a redirec
 
 <xref:Microsoft.AspNetCore.Identity.SignInManager%601.SignOutAsync%2A> clears the user's claims stored in a cookie.
 
-Post is specified in the *Pages/Shared/_LoginPartial.cshtml*:
+Post is specified in the `Pages/Shared/_LoginPartial.cshtml`:
 
 [!code-cshtml[](identity/sample/WebApp3/Pages/Shared/_LoginPartial.cshtml?highlight=15)]
 
@@ -479,16 +481,6 @@ For more information and guidance on migrating your existing Identity store, see
 
 See [Configuration](#pw) for a sample that sets the minimum password requirements.
 
-## AddDefaultIdentity and AddIdentity
-
-<xref:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionUIExtensions.AddDefaultIdentity%2A> was introduced in ASP.NET Core 2.1. Calling `AddDefaultIdentity` is similar to calling the following:
-
-* <xref:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionExtensions.AddIdentity%2A>
-* <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI%2A>
-* <xref:Microsoft.AspNetCore.Identity.IdentityBuilderExtensions.AddDefaultTokenProviders%2A>
-
-See [AddDefaultIdentity source](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Identity/UI/src/IdentityServiceCollectionUIExtensions.cs#L47-L63) for more information.
-
 ## Prevent publish of static Identity assets
 
 To prevent publishing static Identity assets (stylesheets and JavaScript files for Identity UI) to the web root, add the following `ResolveStaticWebAssetsInputsDependsOn` property and `RemoveIdentityAssets` target to the app's project file:
@@ -510,6 +502,7 @@ To prevent publishing static Identity assets (stylesheets and JavaScript files f
 ## Next Steps
 
 * [ASP.NET Core Identity source code](https://github.com/dotnet/aspnetcore/tree/main/src/Identity)
+* [AddDefaultIdentity source](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Identity/UI/src/IdentityServiceCollectionUIExtensions.cs#L47-L63)
 * See [this GitHub issue](https://github.com/dotnet/AspNetCore.Docs/issues/5131) for information on configuring Identity using SQLite.
 * [Configure Identity](xref:security/authentication/identity-configuration)
 * <xref:security/authorization/secure-data>
